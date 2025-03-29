@@ -1,12 +1,57 @@
-# React + Vite
+# NordStorm Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **React-based e-commerce application** built using **Vite**. It showcases various product categories like **Men's Clothing**, **Women's Clothing**, **Kids' Products**, **Shoes**, and more. The application includes features like **pagination**, **loading spinners**, and **error handling** for a seamless user experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **Dynamic Product Rendering**: Fetches data from an external API and displays it dynamically.
+- **Category-Based Filtering**: Displays products based on categories like Men's Clothing, Women's Clothing, Kids' Products, Shoes, etc.
+- **Pagination**: Allows users to navigate through products in chunks.
+- **Loading Spinner**: Displays a spinner while data is being fetched.
+- **Error Handling**: Shows an error message or image when the API call fails.
+- **Responsive Design**: Fully responsive layout using **Tailwind CSS**.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **React**: Frontend library for building the UI.
+- **Vite**: Fast build tool for modern web projects.
+- **Axios**: For making API requests.
+- **Tailwind CSS**: For styling the application.
+- **React Spinners**: For loading indicators.
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+![Home Page](./screenshots/homepage.png)
+
+### Men's Clothing
+![Men's Clothing](./screenshots/mens-clothing.png)
+
+### Women's Products
+![Women's Products](./screenshots/womens-products.png)
+
+### error handling
+![Kids' Products](./screenshots/kids-products.png)
+
+
+
+---
+
+## 📂 Folder Structure
+NordStorm-Assignment/ ├── src/ │ ├── components/ │ │ ├── Header.jsx │ │ ├── Footer.jsx │ ├── pages/ │ │ ├── HomePage.jsx │ │ ├── Men.jsx │ │ ├── Women.jsx │ │ ├── Kids.jsx │ │ ├── Shoes.jsx │ │ ├── AllProducts.jsx │ ├── App.jsx │ ├── main.jsx ├── public/ │ ├── screenshots/ │ │ ├── homepage.png │ │ ├── mens-clothing.png │ │ ├── womens-products.png │ │ ├── kids-products.png │ │ ├── shoes.png ├── README.md ├── package.json ├── vite.config.js
+
+---
+
+## 📦 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/nordstorm-assignment.git
+   cd nordstorm-assignment
+   npm install
