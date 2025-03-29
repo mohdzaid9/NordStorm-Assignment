@@ -6,30 +6,28 @@ import axios from 'axios'
 const HomePage = () => {
 
   const [data,setData] = useState([])
-  // const [error,setError]=useState(null)
-  // const [loading,setLoading]=useState(true)
-  // //fetching data just an example not the real data
-  // useEffect(()=>{
-  //   axios.get('https://api.escuelajs.co/api/v1/products').then((res)=>{
-  //     setData(res.data)
-  //     setLoading(false)
-  //     console.log(res.data)
-  //   })
-  //   .catch((error)=>{
-  //     console.log('some error is just happend : ',error)
-  //     setError(error)
-  //   })
-  // },[])
+  const [error,setError]=useState(null)
+  const [loading,setLoading]=useState(true)
+  const [limit,setLimit]=useState(5)
+  const initial = 0
+  //fetching data just an example not the real data
+ 
+  useEffect(()=>{
+    axios.get(`https://api.escuelajs.co/api/v1/products`).then((res)=>{
+      setData(res.data.slice(initial,limit))
+      setLoading(false)
+      // console.log(res.data)
+    })
+    .catch((error)=>{
+      console.log('some error is just happend : ',error)
+      setError(error)
+    })
+  },[])
+  console.log(data)
 
-  // if(loading) return <p>loading....</p>
-  // if(error) return <p>some error happend</p>
+  if(loading) return <p>loading....</p>
+  if(error) return <p>some error happend</p>
 
-  const getData=async()=>{
-    let response = await fetch('https://api.escuelajs.co/api/v1/products')
-    let finalData = await response.json()
-    setData(finalData)
-  }
-getData()
   return (
   <>
   <div className='grid justify-center '>
@@ -42,19 +40,32 @@ getData()
   <img src='/poster.png' className='h-56 w-full mt-4' alt="60% off poster" srcset="" /></Link>
 </div>
 
-{/* <div className='mt-10'>
+<div className='mt-10'>
   <Link to={'/ShoePoster'}>
   <img src="poster2.png" alt="" srcset=""className='w-full h-' /></Link>
-</div> */}
+</div>
+
 
 <hr />
-<hr />
 
-{data.map((el)=>{
-  <div key={el.i}>
-    <h1>{el.title}</h1>
+<h1 className='text-3xl font-extrabold'>Top Brands you'll love...</h1>
+  <div className='flex gap-4 mt-6 justify-center items-center text-center '>
+    <button className='border-4 border-black bg-black text-white '>Previous</button>
+    {data?.map((el,i)=>(
+         
+      <div key={i} className='shadow-2xl h-96 w-56 '  >
+        <img src={el.images} className='' alt="" srcset="" />
+        <h1 > Title : {el.title}</h1>
+        <h1> Description : {el.slug}</h1>
+        <h1>Price $ :{el.price}</h1>
+      </div>
+    ))}
+  <button className='border-4 border-black bg-black text-white ' onClick={
+    ()=>{
+      setData(data.slice(initial+5,limit+5))
+    }
+  }>Next</button>
   </div>
-})}
 
   <Routes>
     <Route path='/API' element={<PosterData/>}/>
