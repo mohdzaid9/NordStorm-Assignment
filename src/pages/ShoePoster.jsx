@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { HashLoader } from 'react-spinners';
 
-const Kids = () => {
+const ShoePoster = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,9 +10,12 @@ const Kids = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://api.escuelajs.co/api/v1/prducts');  //I made an error by my own to show the error handling 
-       
-        setData(response.data);
+        const response = await axios.get('https://api.escuelajs.co/api/v1/products');
+        // Filter the data to include only products related to shoes
+        const shoeData = response.data.filter((item) =>
+          item.category.name.toLowerCase().includes('shoes')
+        );
+        setData(shoeData);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -42,13 +45,12 @@ const Kids = () => {
       />
     );
 
-
-
+  // Render the fetched data
   return (
     <>
-      <h1 className="text-center text-3xl font-extrabold mt-6">Kids' Products</h1>
+      <h1 className="text-center text-3xl font-extrabold mt-6">Shoe Poster</h1>
       <div className="grid grid-cols-3 gap-4 p-4">
-        {paginatedData?.map((el, i) => (
+        {data?.map((el, i) => (
           <div key={i} className="shadow-2xl text-center p-4 border rounded-md">
             <img src={el.images[0]} alt={el.title} className="h-40 w-full object-cover mb-4" />
             <h1 className="font-bold">Title: {el.title}</h1>
@@ -57,11 +59,8 @@ const Kids = () => {
           </div>
         ))}
       </div>
-      <div className="flex gap-4 mt-6 justify-center items-center text-center">
-       
-      </div>
     </>
   );
 };
 
-export default Kids;
+export default ShoePoster;

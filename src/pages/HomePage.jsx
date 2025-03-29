@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Route ,Routes} from 'react-router-dom'
-import PosterData from './Poster1'
+import { Link,} from 'react-router-dom'
 import axios from 'axios'
+import { HashLoader } from 'react-spinners'
 
 const HomePage = () => {
 
@@ -25,18 +25,27 @@ const HomePage = () => {
   },[])
   console.log(data)
 
-  if(loading) return <p>loading....</p>
+  if (loading)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <HashLoader color="#000000" size={50} />
+      </div>
+    );
   if(error) return <p>some error happend</p>
 
   return (
   <>
-  <div className='grid justify-center '>
-  <h1 className='text-4xl bold font-extrabold '>More to Rack, easier and faster.</h1>
-   <button className='mt-5 p-1 text-gray-500  bg-bl border-2 border-blue-700'>Sign In or Create an Account</button>
-  </div>
+  <div className="grid justify-center">
+  <h1 className="text-4xl bold font-extrabold">More to Rack, easier and faster.</h1>
+  <Link to={'/SignIn'}>
+    <button className="mt-5 p-2 text-gray-500, bg-blue-700 text-white border-2 border-blue-700 rounded-md hover:bg-blue-800 ml-48">
+      Sign In or Create an Account
+    </button>
+  </Link>
+</div>
 
 <div>
-  <Link to={'/API'}>
+  <Link to={'/PosterData'}>
   <img src='/poster.png' className='h-56 w-full mt-4' alt="60% off poster" srcset="" /></Link>
 </div>
 
@@ -53,12 +62,12 @@ const HomePage = () => {
     <button className='border-4 border-black bg-black text-white '>Previous</button>
     {data?.map((el,i)=>(
          
-      <div key={i} className='shadow-2xl h-96 w-56 '  >
-        <img src={el.images} className='' alt="" srcset="" />
-        <h1 > Title : {el.title}</h1>
-        <h1> Description : {el.slug}</h1>
-        <h1>Price $ :{el.price}</h1>
-      </div>
+       <div key={i} className="shadow-2xl text-center p-4 border rounded-md">
+            <img src={el.images} alt={el.title} className="h-40 w-full object-cover mb-4" />
+            <h1 className="font-bold">Title: {el.title}</h1>
+            <h1 className="text-sm text-gray-600">Description: {el.slug}</h1>
+            <h1 className="text-lg font-semibold">Price: ${el.price}</h1>
+          </div>
     ))}
   <button className='border-4 border-black bg-black text-white ' onClick={
     ()=>{
@@ -67,9 +76,12 @@ const HomePage = () => {
   }>Next</button>
   </div>
 
-  <Routes>
-    <Route path='/API' element={<PosterData/>}/>
-  </Routes>
+  {/* poster 3  */}
+  <div>
+    <Link to={'/WomenPoster'}>
+    <img src='/poster3.png' className='h-fit w-full mt-4' alt="60% off poster" srcset="" /></Link>
+  </div>
+
   </>
   )
 }

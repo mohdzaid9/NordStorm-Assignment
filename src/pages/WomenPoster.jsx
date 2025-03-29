@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { HashLoader } from 'react-spinners';
 
-const Women = () => {
+const WomenPoster = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(0); // Track the current page
-  const limit = 6; // Number of items per page
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0); 
+  const limit = 8; // Number of items per page
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://api.escuelajs.co/api/v1/products');
-        console.log(response.data); // Debugging: Log the API response
-        // Shuffle the data to display random products
-        const shuffledData = response.data.sort(() => 0.5 - Math.random());
-        setData(shuffledData);
+    setLoading(true); 
+    axios
+      .get(`https://api.escuelajs.co/api/v1/products`)
+      .then((res) => {
+        setData(res.data);
         setLoading(false);
-      } catch (error) {
-        console.error(error);
+      })
+      .catch((error) => {
         setError(error);
         setLoading(false);
-      }
-    };
-
-    fetchData();
+        console.log('Some error just happened: ', error);
+      });
   }, []);
 
-  // Handle loading state
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -36,15 +31,7 @@ const Women = () => {
       </div>
     );
 
-  // Handle error state
-  if (error)
-    return (
-      <img
-        className="ml-96"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/losing-internet-connection-on-tablet-illustration-download-in-svg-png-gif-file-formats--page-not-found-oops-error-404-need-support-web-issues-pack-people-illustrations-6359973.png"
-        alt="Error"
-      />
-    );
+  if (error) return <p>Some error happened</p>;
 
   // Calculate the items to display based on the current page
   const startIndex = page * limit;
@@ -53,13 +40,12 @@ const Women = () => {
 
   return (
     <>
-      <h1 className="text-center text-3xl font-extrabold mt-6">Women Products....</h1>
-      <div className="grid grid-cols-3 gap-4 p-4">
+      <div className="grid justify-center grid-cols-4 gap-10 mt-10">
         {paginatedData?.map((el, i) => (
           <div key={i} className="shadow-2xl text-center p-4 border rounded-md">
-            <img src={el.images[0]} alt={el.title} className="h-40 w-full object-cover mb-4" />
+            <img src={el.images} alt={el.title} className="h-46 w-full object-cover mb-4" />
             <h1 className="font-bold">Title: {el.title}</h1>
-            <h1 className="text-sm text-gray-600">Description: {el.description}</h1>
+            <h1 className="text-sm text-gray-600">Description: {el.slug}</h1>
             <h1 className="text-lg font-semibold">Price: ${el.price}</h1>
           </div>
         ))}
@@ -84,4 +70,4 @@ const Women = () => {
   );
 };
 
-export default Women;
+export default WomenPoster;

@@ -5,6 +5,11 @@ import HomePage from "./pages/HomePage"
 import Women from "./pages/Women"
 import Kids from "./pages/Kids"
 import Shoes from "./pages/Shoes"
+import PosterData from "./pages/PosterData"
+import ShoePoster from "./pages/ShoePoster"
+import WomenPoster from "./pages/WomenPoster"
+import Footer from "./Footer"
+import AllProducts from "./pages/AllProducts"
 
 function App() {
 
@@ -28,27 +33,28 @@ function App() {
      <br />
      <hr  />
 
-
-      
       <div className="flex justify-evenly">
+        <Link to={'/AllProducts'}>All Products</Link>
         <Link to={'/Men'}><p>Men</p></Link>
         <Link to={'/Women'}><p>Women</p></Link>
         <Link to={'/Kids'}><p>Kids</p></Link>
         <Link to={'/Shoes'}><p>Shoes</p></Link>
       </div>
 
-
         <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/SignIn" element={<Sign/>}/>
+        <Route path="/AllProducts" element={<AllProducts/>}/>
         <Route path="/Men"element={<Men/>}/>
         <Route path="/Women" element={<Women/>}/>
         <Route path="/Kids" element={<Kids/>}/>
         <Route path="/Shoes" element={<Shoes/>}/>
+        <Route path='/PosterData' element={<PosterData/>}/>
+        <Route path='/ShoePoster' element={<ShoePoster/>}/>
+        <Route path='/WomenPoster' element={<WomenPoster/>}/>
         </Routes>
-
-
-
+  
+  <Footer/>
     </>
   )
 }
