@@ -37,7 +37,7 @@ This project is a **React-based e-commerce application** built using **Vite**. I
 ![Women's Products](./screenshots/womens-products.png)
 
 ### error handling
-![Kids' Products](./screenshots/kids-products.png)
+![Kids' Products](./screenshots/error-handling.png)
 
 
 
